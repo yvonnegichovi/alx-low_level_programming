@@ -6,7 +6,7 @@
  * main - entry point
  * function - if , else if, else
  *
- * return: Always 0 (Success)
+ * Return: 0 (Success)
  */
 
 int main(void)
