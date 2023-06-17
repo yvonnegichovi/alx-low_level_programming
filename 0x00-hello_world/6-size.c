@@ -6,10 +6,20 @@
  */
 int main(void)
 {
-	int a;
-	char b;
+	char a;
+	int b;
 	long int c;
-	float d;
-	printf("Size of the variable is:%d,%c,%ld,%f bytes", sizeof(a, b, c, d);
+	long long int d;
+	float e;
+	printf("Size of a char:");
+	scanf("%c byte(s)", &a);		
+	printf("Size of an int:");
+	scanf("%d byte(s)", &b);	
+	printf("Size of a long int:");
+	scanf("%ld byte(s)", &c);	
+	printf("Size of a long long int:");
+	scanf("%lld byte(s)", &d);
+	printf("Size of a float:");
+	scanf("%f byte(s)", &e);
 	return (0);
 }
