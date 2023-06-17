@@ -2,10 +2,10 @@
 #include <time.h>
 #include <stdio.h>
 
-/*
+/**
  * main - entry point
  * function - if, else if, else
- * Return: (0) (Success
+ * Return: Always 0 (Success)
  */
 
 int main(void)
