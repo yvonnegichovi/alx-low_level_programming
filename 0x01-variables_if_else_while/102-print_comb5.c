@@ -22,7 +22,7 @@ int main(void)
 			putchar(second_digit_i + '0');
 			putchar(' ');
 			putchar(first_digit_j + '0');
-			putchar(second_digit_j + '1');
+			putchar(second_digit_j + '0');
 
 			if (i != 99 || j != 99)
 			{
