@@ -6,9 +6,6 @@
  * Return: 0 (Success)
  */
 
-extern int _putchar(void);
-
-int main(void)
 {
 	printf("_putchar\n");
 
