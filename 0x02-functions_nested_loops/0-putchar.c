@@ -1,7 +1,7 @@
 #include "main.h"
-
 /**
- * main - Entry point
+ * main - print _putchar
+ * is written by Yvonne
  * Return: 0 (Success)
  */
 
