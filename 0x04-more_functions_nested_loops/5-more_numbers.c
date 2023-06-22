@@ -2,10 +2,6 @@
 
 /**
  * more_numbers - prints 10 times the numbers, from 0 to 14,
- * @a: interger of number of times the numbers are printed
- * @b: char of the numbers to be printed
- * followed by a new line
- * Return: 0
  */
 
 void more_numbers(void)
