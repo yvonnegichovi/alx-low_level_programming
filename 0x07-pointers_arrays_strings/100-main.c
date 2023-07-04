@@ -3,7 +3,7 @@
 
 /**
 * main - check the code
-*
+* set_string - sets the value of a pointer to a char
 * Return: Always 0.
 */
 int main(void)
