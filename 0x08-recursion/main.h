@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 
+int _strlen_recursion(char *s);
 int actual_prime(int n, int i);
 int actual_sqrt_recursion(int n, int i);
 void _puts_recursion(char *s);
