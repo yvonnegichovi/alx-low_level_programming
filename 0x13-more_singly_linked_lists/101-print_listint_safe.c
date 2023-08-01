@@ -14,7 +14,7 @@ size_t looped_listint_len(const listint_t *head)
 	size_t nodes = 0;
 	const listint_t *two, *three;
 
-	if (!head || !(head->next))
+	if (head == NULL || head->next == NULL)
 		return (0);
 
 	two = head->next;
