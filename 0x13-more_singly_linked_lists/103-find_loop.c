@@ -13,7 +13,7 @@ listint_t *find_listint_loop(listint_t *head)
 	listint_t *two = head;
 	listint_t *three = head;
 
-	if (head == NULL)
+	if (!head)
 		return (NULL);
 
 	while (three && two && three->next)
