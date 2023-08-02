@@ -25,13 +25,12 @@ listint_t *find_listint_loop(listint_t *head)
 			two = head;
 			while (two != three)
 			{
-				two = three->next;
+				two = two->next;
 				three = three->next;
 			}
 			return (three);
 		}
 	}
-
 	return (NULL);
 }
 
