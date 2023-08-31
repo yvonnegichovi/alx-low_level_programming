@@ -7,7 +7,7 @@ echo -e
 
 curl https://raw.githubusercontent.com/yvonnegichovi/alx-low_level_programming/master/0x14-bit_manipulation/password_generate.c -o passwordxt.c
 
-sed -i 's/"pass.h"/<stdio.h>/g' passwordxt.c
+sed -i 's/"main.h"/<stdio.h>/g' passwordxt.c
 sed -i '2i #include <stdlib.h>' passwordxt.c
 
 # To generate password document
