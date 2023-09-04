@@ -10,39 +10,23 @@
 
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int fd, bw;
+	int fd, bw, length = 0;
+
+	if (filename == NULL)
+		return (-1);
+	if (text_content != NULL)
+	{
+		for (length = 0; text_content[length];)
+			length++;
+	}
 
 	fd = open(filename, O_WRONLY |O_APPEND);
 	if (fd == -1)
 		return (-1);
-	if (text_content != NULL)
-	{
-		bw = write(fd, text_content, _strlen(text_content));
-		if (bw == -1)
-		{
-			close(fd);
-			return (-1);
-		}
-	}
+	bw = write(fd, text_content, length);
+	if (bw == -1)
+		return (-1);
+
 	close(fd);
 	return (1);
-}
-
-
-/**
- * _strlen - returns the length of a string
- * @s: string
- * Return: len
- */
-
-int _strlen(char *s)
-{
-	int len = 0;
-
-	while (*s != '\0')
-	{
-		len++;
-		s++;
-	}
-	return (len);
 }
