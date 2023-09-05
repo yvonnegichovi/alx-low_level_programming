@@ -8,6 +8,27 @@
 
 void header_info(Elf64_Ehdr *header);
 
+/**
+ * check_elf - Checks if a file is an ELF file.
+ * @e_ident: A pointer to an array containing the ELF magic numbers.
+ */
+void check_elf(unsigned char *e_ident)
+{
+	int index;
+
+	for (index = 0; index < 4; index++)
+	{
+		if (e_ident[index] != 127 &&
+		    e_ident[index] != 'E' &&
+		    e_ident[index] != 'L' &&
+		    e_ident[index] != 'F')
+		{
+			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+			exit(98);
+		}
+	}
+}
+
 
 void header_info(Elf64_Ehdr *header)
 {
@@ -18,14 +39,16 @@ void header_info(Elf64_Ehdr *header)
 
 	for (index = 0; index < EI_NIDENT; index++)
 	{
-		printf("%2x%s", header->e_ident[index], (index == EI_NIDENT -1) ? "\n" : " ");
+		printf("%2x%s", header->e_ident[index], (index == EI_NIDENT - 1) ? "\n" : " ");
 	}
-	printf(" Class: %s\n", (header->e_ident[EI_CLASS] == ELFCLASS64) ? "ELF64": "ELF32");
-	printf(" Data: %s\n", (header->e_ident[EI_DATA] == ELFDATA2LSB) ? "2'Ss complement, little endian" :
+	printf(" Class:                             %s\n", (header->e_ident[EI_CLASS] == ELFCLASS64) ? "ELF64" : "ELF32");
+	printf(" Data:                             %s\n",
+			(header->e_ident[EI_DATA] == ELFDATA2LSB) ? "2's complement, little endian" :
 			(header->e_ident[EI_DATA] == ELFDATA2MSB) ? "2's complement, big endian" : "unknown");
-	printf(" Version: %d", header->e_ident[EI_VERSION]);
+	printf(" Version:                             %d",
+			header->e_ident[EI_VERSION]);
 	printf((header->e_ident[EI_VERSION] == EV_CURRENT) ? " (current)\n" : "\n");
-	printf(" OS/ABI: ");
+	printf(" OS/ABI:                             ");
 	switch (header->e_ident[EI_OSABI])
 	{
 		case ELFOSABI_NONE: printf("UNIX - System V\n"); break;
@@ -56,14 +79,10 @@ void header_info(Elf64_Ehdr *header)
 
 int main(int argc, char *argv[])
 {
-	int fd;
+	int fd, fr;
 	Elf64_Ehdr *header;
+	(void)argc;
 
-	if (argc != 2)
-	{
-		dprintf(STDERR_FILENO, "Usage: elf_header elf_filename\n");
-		exit(98);
-	}
 	/* opening the file*/
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -78,17 +97,14 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: malloc failed\n");
 		exit(98);
 	}
-	if (read(fd, header, sizeof(Elf64_Ehdr)) != sizeof(Elf64_Ehdr))
+	fr = read(fd, header, sizeof(Elf64_Ehdr));
+	if (fr == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 	/* check if file is Elf */
-	if (header->e_ident[EI_MAG0] != ELFMAG0 ||
-	    header->e_ident[EI_MAG1] != ELFMAG1 ||
-	    header->e_ident[EI_MAG2] != ELFMAG2 ||
-	    header->e_ident[EI_MAG3] != ELFMAG3)
-		dprintf(STDERR_FILENO, "Error: Not an ELF file\n"), exit(98);
+	check_elf(header->e_ident);
 	/* print the display */
 	header_info(header);
 	close(fd);
