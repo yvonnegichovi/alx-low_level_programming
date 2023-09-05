@@ -77,37 +77,35 @@ void header_info(Elf64_Ehdr *header)
 	printf(" Entry point address: %#lx\n", (unsigned long)header->e_type);
 }
 
-int main(int argc, char *argv[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-	int fd, fr;
 	Elf64_Ehdr *header;
-	(void)argc;
+	int o, r;
 
-	/* opening the file*/
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	o = open(argv[1], O_RDONLY);
+	if (o == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 		exit(98);
 	}
-	/* reading ELF header */
 	header = malloc(sizeof(Elf64_Ehdr));
 	if (header == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 		exit(98);
 	}
-	fr = read(fd, header, sizeof(Elf64_Ehdr));
-	if (fr == -1)
+	r = read(o, header, sizeof(Elf64_Ehdr));
+	if (r == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		free(header);
+		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
 		exit(98);
 	}
-	/* check if file is Elf */
+
 	check_elf(header->e_ident);
-	/* print the display */
+
 	header_info(header);
-	close(fd);
+	close(o);
 
 	return (0);
 }
