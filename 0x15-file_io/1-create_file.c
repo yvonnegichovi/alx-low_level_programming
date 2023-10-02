@@ -1,4 +1,7 @@
 #include "main.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 /**
  * create_file - creates a file, writes and truncates it
@@ -23,6 +26,7 @@ int create_file(const char *filename, char *text_content)
 		bw = write(fd, text_content, _strlen(text_content));
 		if (bw == -1)
 		{
+			close(fd);
 			return (-1);
 		}
 	}
