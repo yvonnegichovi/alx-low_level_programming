@@ -18,7 +18,7 @@ void hash_table_print(const hash_table_t *ht)
 	unsigned long int i;
 	hash_node_t *current;
 	int printed = 0;
-	
+
 	if (ht == NULL)
 		return;
 
