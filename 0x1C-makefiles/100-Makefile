@@ -3,12 +3,12 @@ COMPILER = $(CC)
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 NAME = school
-RM = rm -f
+RM = /bin/rm -f
 CFLAGS = -Wall -Werror -Wextra -pedantic
 
 all:$(NAME)
 $(NAME):$(OBJ)
-	$(CC) $(OBJ) -O $(NAME)
+	$(COMPILER) $(OBJ) -O $(NAME)
 %.o:%.c m.h
 	$(COMPILER) $(CLAGS) -c $< -o $@
 
