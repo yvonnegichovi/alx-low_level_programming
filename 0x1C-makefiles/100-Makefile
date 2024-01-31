@@ -4,22 +4,25 @@ SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 NAME = school
 RM = /bin/rm -f
+RMOBJ = $(RM) $(OBJ)
+RMNAME = $(RM) $(NAME)
 CFLAGS = -Wall -Werror -Wextra -pedantic
+FLAGS = $(CLAGS)
 
 all:$(NAME)
 $(NAME):$(OBJ)
 	$(COMPILER) $(OBJ) -O $(NAME)
 %.o:%.c m.h
-	$(COMPILER) $(CLAGS) -c $< -o $@
+	$(COMPILER) $(FLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ) $(wildcars *~) $(NAME)
+	$(RMOBJ) $(wildcars *~) $(NAME)
 
 oclean:
-	$(RM) $(OBJ)
+	$(RMOBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RMNAME)
 
 re: fclean all
 
