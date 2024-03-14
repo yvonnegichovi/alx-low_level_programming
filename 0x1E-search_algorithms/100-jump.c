@@ -38,7 +38,7 @@ int jump_search(int *array, size_t size, int value)
 	jump = sqrt(size);
 	curr = min(jump, size) - 1;
 
-	if (array == NULL)
+	if (array == NULL || size == 0)
 		return (-1);
 
 	while (array[curr] < value)
